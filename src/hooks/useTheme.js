@@ -13,5 +13,5 @@ export const useTheme = () => {
       })
 
 
-      return {theme, setTheme}
+      return [theme, setTheme]
 };

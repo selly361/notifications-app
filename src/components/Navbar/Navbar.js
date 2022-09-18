@@ -1,31 +1,35 @@
 import React from "react";
-import { MdCircleNotifications } from "react-icons/md";
-import { BsFillSunFill, BsFillMoonFill } from 'react-icons/bs'
-import { useTheme } from "../../hooks/useTheme";
 import styled from "styled-components";
+import { ReactComponent as Sun } from "../../assets/images/icon-sun.svg";
+import { ReactComponent as Moon } from "../../assets/images/icon-moon.svg";
 
 const StyledHeader = styled.header`
-  height: 10vh;
-  width: 100vw;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 1rem;
-  align-items: center;
+  padding: 2rem;
+  display: inline-block;
 
   button {
-    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    & > * {
+      transform: scale(2);
+    }
   }
 `;
 
-const Navbar = () => {
-  const { theme, setTheme } = useTheme();
+const Navbar = ({ theme, setTheme }) => {
   return (
     <StyledHeader>
-      <div>
-        <MdCircleNotifications />
-      </div>
-      <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-        {theme === "dark" ? <BsFillSunFill /> : <BsFillMoonFill />}
+      <button
+        onClick={() => {
+          setTheme(theme === "dark" ? "light" : "dark");
+        }}
+      >
+        {theme === "dark" ? <Sun /> : <Moon />}
       </button>
     </StyledHeader>
   );

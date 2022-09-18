@@ -31,57 +31,81 @@ import { createGlobalStyle } from "styled-components";
 // --form-label: #dfe3fa;
 // --small-text-color: #e0e4fb;
 
-
-
-
-
-
-
 export const dark = {
-    color: {
-        body: {
-            bg: "#141625",
-        },
+  color: {
+    body: {
+      bg: "#141625",
+    },
 
-        heading: {
-            color: "#fff"
-        },
+    heading: {
+      color: "#fff",
+    },
+    text: {
+      color: "white",
+      hover: "hsl(219, 85%, 76%)",
+    },
 
-        notifArea: {
-            bg: "#1e2139"
-        }
-    }
-}
+    notifArea: {
+      bg: "#1e2139",
+      boxShadow: "rgb(0 0 0 / 5%) -6px 6px 24px",
+    },
 
+    notificationMessage: {
+      message: "hsl(219, 12%, 82%)",
+      post: "hsl(219, 85%, 76%)",
+    },
+
+    privateMessage: "#3d5896"
+  },
+};
 
 export const light = {
-    color: {
-        body: {
-            bg: "hsl(211, 68%, 94%)"
-        },
+  color: {
+    body: {
+      bg: "hsl(211, 68%, 94%)",
+    },
 
-        heading: {
-            color: "hsl(224, 21%, 14%)"
-        },
+    heading: {
+      color: "hsl(224, 21%, 14%)",
+    },
+    text: {
+      color: "black",
+      hover: "hsl(219, 85%, 26%)",
+    },
 
-        notifArea: {
-            bg: "hsl(0, 0%, 100%)"
-        }
-    }
-}
+    notifArea: {
+      bg: "hsl(0, 0%, 100%)",
+      boxShadow: "rgb(0 0 0 / 5%) -6px 6px 24px",
+    },
 
+    notificationMessage: {
+      message: "hsl(219, 12%, 42%)",
+      post: "hsl(219, 85%, 26%)",
+    },
 
+    privateMessage: "hsl(205, 33%, 90%)"
+  },
+};
 
 export const GlobalStyles = createGlobalStyle`
     * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
+        font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
 
     body {
-        height: 100vh;
+        min-height: 100vh;
         width: 100vw;
+        overflow-x: hidden;
     }
-`
+
+
+    @media (max-width: 1000px){
+        html {
+            font-size: 12px;
+        }
+    }
+`;

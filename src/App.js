@@ -2,30 +2,28 @@ import Navbar from "./components/Navbar/Navbar";
 import styled, { ThemeProvider } from "styled-components";
 import { dark, light, GlobalStyles } from "./global-styles/global-styles";
 import { useTheme } from "./hooks/useTheme";
-
-
+import Notifications from "./components/Notifications/Notifications";
 
 const Container = styled.div`
-  height: 100vh;
+  padding: 2rem;
+  min-height: 100vh;
   width: 100vw;
   background-color: ${({ theme }) => theme.color.body.bg};
+  transition: 2s background-color ease;
+  display: grid;
 
-  h1 {
-    color: red;
-    font-size: 10rem;
+  @media (max-width: 1000px){
+    padding: 0;
   }
 `;
 
-
-
 function App() {
-  const { theme } = useTheme();
+  const [theme, setTheme] = useTheme();
   return (
     <ThemeProvider theme={theme === "dark" ? dark : light}>
       <GlobalStyles />
       <Container>
-        <Navbar />
-        <h1>{theme}</h1>
+        <Notifications theme={theme} setTheme={setTheme} />
       </Container>
     </ThemeProvider>
   );

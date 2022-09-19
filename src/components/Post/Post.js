@@ -7,6 +7,23 @@ const StyledPost = styled.div`
   align-items: start;
   padding: 1rem;
   position: relative;
+  border-radius: 10px;
+  transition: 2s background-color ease;
+  width: 95%;
+
+  &.unmarked {
+    background-color: ${({ theme }) => theme.color.unread.bg};
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  
+
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
 `;
 const ProfileImage = styled.img`
   height: 50px;
@@ -25,9 +42,12 @@ const Name = styled.h4`
 const NameContainer = styled.div`
   display: flex;
   gap: 0.5rem;
+  align-items: center;
 
-  @media (max-width: 1000px){
+  @media (max-width: 1000px) {
     flex-flow: column;
+    align-items: start;
+    justify-content: center;
   }
 `;
 
@@ -61,7 +81,7 @@ const PrivateMessage = styled(Time)`
   border: 1px solid rgba(147, 157, 174, 0.5);
   border-radius: 3px;
   transition: 1s background-color ease;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 
   &:hover {
     cursor: pointer;
@@ -70,11 +90,23 @@ const PrivateMessage = styled(Time)`
 `;
 
 const Picture = styled.img`
-  height: 60px;
+  height: 5rem;
 `;
 const PictureContainer = styled.div`
- position: absolute;
- right: 1rem;
+  position: absolute;
+  right: 1rem;
+`;
+
+const Dot = styled.div`
+  height: 10px;
+  width: 10px;
+  background-color: hsl(1, 90%, 64%);
+  border-radius: 100%;
+`;
+
+const Group = styled.span`
+  font-weight: 800;
+  color: ${({ theme }) => theme.color.notificationMessage.post};
 `;
 
 // notificationMessage
@@ -87,9 +119,15 @@ export default function Post({
   time,
   privateMessage,
   picture,
+  unread,
+  setUnread,
+  group,
 }) {
   return (
-    <StyledPost>
+    <StyledPost
+      className={unread?.includes(name) ? "unmarked" : null}
+      onClick={() => setUnread(() => unread.filter((user) => user !== name))}
+    >
       <ProfileImage src={image} />
       <UserContainer>
         <NameContainer>
@@ -98,6 +136,8 @@ export default function Post({
             {message}
             <PostMessage> {postMessage}</PostMessage>
           </Message>
+          {group && <Group>{group}</Group>}
+          {unread?.includes(name) && <Dot />}
         </NameContainer>
         <Time>{time}</Time>
         {privateMessage && (
@@ -105,12 +145,12 @@ export default function Post({
             <PrivateMessage>{privateMessage}</PrivateMessage>
           </>
         )}
+        {picture && (
+          <PictureContainer>
+            <Picture src={picture} />
+          </PictureContainer>
+        )}
       </UserContainer>
-      {picture && (
-        <PictureContainer>
-          <Picture src={picture} />
-        </PictureContainer>
-      )}
     </StyledPost>
   );
 }

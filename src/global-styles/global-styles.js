@@ -55,8 +55,13 @@ export const dark = {
       post: "hsl(219, 85%, 76%)",
     },
 
-    privateMessage: "#3d5896"
+    privateMessage: "#3d5896",
+
+    unread: {
+      bg: "hsl(211, 68%, 24%)"
+    }
   },
+
 };
 
 export const light = {
@@ -83,7 +88,11 @@ export const light = {
       post: "hsl(219, 85%, 26%)",
     },
 
-    privateMessage: "hsl(205, 33%, 90%)"
+    privateMessage: "hsl(205, 33%, 90%)",
+
+    unread: {
+      bg: "hsl(211, 68%, 94%)"
+    }
   },
 };
 

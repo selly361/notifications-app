@@ -12,7 +12,7 @@ import {
   kimberly,
   nathan,
   rizky,
-  picture
+  picture,
 } from "../../assets/images";
 
 const ThemeButton = styled.button`
@@ -39,11 +39,16 @@ const Container = styled.div`
   flex-flow: column;
   gap: 2rem;
 
-
-  @media (max-width: 1000px){
+  @media (max-width: 900px) {
     width: 100vw;
-    padding: .3rem;
+    padding: 2rem;
+   
+  }
+
+  @media (max-width: 480px){
+    padding: 2rem .5rem;
     min-height: 100vh;
+
   }
 `;
 
@@ -54,7 +59,6 @@ const Header = styled.section`
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-
 `;
 
 const Title = styled.h2`
@@ -64,6 +68,9 @@ const Title = styled.h2`
   display: flex;
   align-items: center;
 
+  @media (max-width: 466px){
+    font-size: 1.5rem;
+  }
 `;
 
 const Length = styled.span`
@@ -77,6 +84,7 @@ const Length = styled.span`
 `;
 
 const MarkAsRead = styled.button`
+  display: block;
   color: ${({ theme }) => theme.color.text.color};
   transition: 1s color ease;
 
@@ -102,6 +110,7 @@ const Notifications = ({ theme, setTheme }) => {
 
   return (
     <Container>
+      <Header>
       <ThemeButton
         onClick={() => {
           setTheme(theme === "dark" ? "light" : "dark");
@@ -109,7 +118,6 @@ const Notifications = ({ theme, setTheme }) => {
       >
         {theme === "dark" ? <Sun /> : <Moon />}
       </ThemeButton>
-      <Header>
         <Title>
           Notifications <Length>{unread.length}</Length>
         </Title>
@@ -124,6 +132,8 @@ const Notifications = ({ theme, setTheme }) => {
           time="1m ago"
           message="reacted to your recent post"
           postMessage="My first tournament today!"
+          unread={unread}
+          setUnread={setUnread}
         />
 
         <Post
@@ -131,6 +141,8 @@ const Notifications = ({ theme, setTheme }) => {
           name="Angela Gray"
           time="5m ago"
           message="followed you"
+          unread={unread}
+          setUnread={setUnread}
         />
         <Post
           image={jacob}
@@ -138,6 +150,8 @@ const Notifications = ({ theme, setTheme }) => {
           time="1 day ago"
           message="has joined your group"
           group="Chess Club"
+          unread={unread}
+          setUnread={setUnread}
         />
         <Post
           image={rizky}
@@ -159,20 +173,19 @@ const Notifications = ({ theme, setTheme }) => {
           time="1 week ago"
           message=" commented on your picture"
           picture={picture}
-
         />
         <Post
           image={nathan}
           name="Jacob Thompson"
           time="2 weeks ago"
           message="reacted to your recent post"
-          postMessage="5 end-game strategies to increase your win rate"
+          postMessage="5 end-game strategies..."
         />
         <Post
           image={anna}
           name="Jacob Thompson"
           time="2 weeks ago"
-          message="has joined your group"
+          message="left the group😥"
           group="Chess Club"
         />
       </Posts>

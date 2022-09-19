@@ -5,7 +5,7 @@ const StyledPost = styled.div`
   display: flex;
   gap: 1rem;
   align-items: start;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   position: relative;
   border-radius: 10px;
   transition: 2s background-color ease;
@@ -14,12 +14,12 @@ const StyledPost = styled.div`
   &.unmarked {
     background-color: ${({ theme }) => theme.color.unread.bg};
 
-    &:hover {
-      cursor: pointer;
-    }
   }
 
   
+  &:hover {
+      cursor: pointer;
+    }
 
   @media (max-width: 1000px) {
     width: 100%;
@@ -90,11 +90,17 @@ const PrivateMessage = styled(Time)`
 `;
 
 const Picture = styled.img`
-  height: 5rem;
+
 `;
 const PictureContainer = styled.div`
   position: absolute;
-  right: 1rem;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  height: max-content;
 `;
 
 const Dot = styled.div`
@@ -119,14 +125,15 @@ export default function Post({
   time,
   privateMessage,
   picture,
-  unread,
-  setUnread,
+  unread = [],
   group,
+  handleClick
 }) {
+
   return (
     <StyledPost
-      className={unread?.includes(name) ? "unmarked" : null}
-      onClick={() => setUnread(() => unread.filter((user) => user !== name))}
+      className={unread.includes(name) && "unmarked"}
+      onClick={() => handleClick(name)}
     >
       <ProfileImage src={image} />
       <UserContainer>
@@ -137,7 +144,7 @@ export default function Post({
             <PostMessage> {postMessage}</PostMessage>
           </Message>
           {group && <Group>{group}</Group>}
-          {unread?.includes(name) && <Dot />}
+          {unread.includes(name) ? <Dot /> : null}
         </NameContainer>
         <Time>{time}</Time>
         {privateMessage && (

@@ -28,7 +28,7 @@ const ThemeButton = styled.button`
 
 const Container = styled.div`
   min-height: 80vh;
-  width: max-content;
+  width: 60vw;
   background-color: ${({ theme }) => theme.color.notifArea.bg};
   margin: auto;
   border-radius: 10px;
@@ -42,13 +42,11 @@ const Container = styled.div`
   @media (max-width: 900px) {
     width: 100vw;
     padding: 2rem;
-   
   }
 
-  @media (max-width: 480px){
-    padding: 2rem .5rem;
+  @media (max-width: 480px) {
+    padding: 2rem 0.5rem;
     min-height: 100vh;
-
   }
 `;
 
@@ -68,7 +66,7 @@ const Title = styled.h2`
   display: flex;
   align-items: center;
 
-  @media (max-width: 466px){
+  @media (max-width: 466px) {
     font-size: 1.5rem;
   }
 `;
@@ -108,16 +106,26 @@ const Notifications = ({ theme, setTheme }) => {
     "Jacob Thompson",
   ]);
 
+  const handleClick = (name) => {
+    let copy = unread;
+    if (unread.includes(name)) {
+      copy = unread.filter((user) => user !== name);
+      setUnread(copy);
+    } else if (!unread.includes(name)) {
+      setUnread(prev => [...prev, name])
+    }
+  };
+
   return (
     <Container>
       <Header>
-      <ThemeButton
-        onClick={() => {
-          setTheme(theme === "dark" ? "light" : "dark");
-        }}
-      >
-        {theme === "dark" ? <Sun /> : <Moon />}
-      </ThemeButton>
+        <ThemeButton
+          onClick={() => {
+            setTheme(theme === "dark" ? "light" : "dark");
+          }}
+        >
+          {theme === "dark" ? <Sun /> : <Moon />}
+        </ThemeButton>
         <Title>
           Notifications <Length>{unread.length}</Length>
         </Title>
@@ -133,7 +141,7 @@ const Notifications = ({ theme, setTheme }) => {
           message="reacted to your recent post"
           postMessage="My first tournament today!"
           unread={unread}
-          setUnread={setUnread}
+          handleClick={handleClick}
         />
 
         <Post
@@ -142,7 +150,7 @@ const Notifications = ({ theme, setTheme }) => {
           time="5m ago"
           message="followed you"
           unread={unread}
-          setUnread={setUnread}
+          handleClick={handleClick}
         />
         <Post
           image={jacob}
@@ -151,7 +159,7 @@ const Notifications = ({ theme, setTheme }) => {
           message="has joined your group"
           group="Chess Club"
           unread={unread}
-          setUnread={setUnread}
+          handleClick={handleClick}
         />
         <Post
           image={rizky}
@@ -166,6 +174,8 @@ const Notifications = ({ theme, setTheme }) => {
               game.
             </>
           }
+          unread={unread}
+          handleClick={handleClick}
         />
         <Post
           image={kimberly}
@@ -173,20 +183,26 @@ const Notifications = ({ theme, setTheme }) => {
           time="1 week ago"
           message=" commented on your picture"
           picture={picture}
+          unread={unread}
+          handleClick={handleClick}
         />
         <Post
           image={nathan}
-          name="Jacob Thompson"
+          name="Nathan Peterson"
           time="2 weeks ago"
           message="reacted to your recent post"
           postMessage="5 end-game strategies..."
+          unread={unread}
+          handleClick={handleClick}
         />
         <Post
           image={anna}
-          name="Jacob Thompson"
+          name="Anna Kim"
           time="2 weeks ago"
           message="left the group😥"
           group="Chess Club"
+          unread={unread}
+          handleClick={handleClick}
         />
       </Posts>
     </Container>
